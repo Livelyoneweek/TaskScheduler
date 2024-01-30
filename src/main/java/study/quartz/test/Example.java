@@ -3,7 +3,7 @@ package study.quartz.test;
 import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
 
-public class JobService implements Job {
+public class Example implements Job {
 
     public void execute(JobExecutionContext context) {
         System.out.println("Hello World!");
@@ -18,7 +18,7 @@ public class JobService implements Job {
             Scheduler scheduler = schedulerFactory.getScheduler();
 
             // Job 생성
-            JobDetail job = JobBuilder.newJob(JobService.class).withIdentity("job1", "group1").build();
+            JobDetail job = JobBuilder.newJob(Example.class).withIdentity("job1", "group1").build();
 
             // Trigger 생성 (10초마다 반복)
             Trigger trigger = TriggerBuilder.newTrigger().withIdentity("trigger1", "group1")

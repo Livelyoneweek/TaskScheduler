@@ -19,9 +19,9 @@ public class SchedulerController {
      * 스케줄링 등록
      */
     @PostMapping
-    public Boolean register(@RequestBody @Validated SchedulerDto.Req.Register dto) {
-        log.info("### SchedulerController.register");
-        return schedulerService.scheduleJob(dto.getJobName(), dto.getGroupName(), dto.getCronExpression(), dto.getType());
+    public Boolean registerJob(@RequestBody @Validated SchedulerDto.Req.Register dto) {
+        log.info("### SchedulerController.registerJob");
+        return schedulerService.registerJob(dto.getJobName(), dto.getGroupName(), dto.getCronExpression(), dto.getType());
     }
 
     /**
@@ -29,8 +29,8 @@ public class SchedulerController {
      * 주기만 바꾸기 때문에, 업데이트 로직을 사용하기보단-> 삭제 후 생성을 추천
      */
     @PutMapping
-    public Boolean Update(@RequestBody @Validated SchedulerDto.Req.Update dto) {
-        log.info("### SchedulerController.Update");
+    public Boolean updateJob(@RequestBody @Validated SchedulerDto.Req.Update dto) {
+        log.info("### SchedulerController.updateJob");
         return schedulerService.updateJob(dto.getJobName(), dto.getGroupName(), dto.getCronExpression());
     }
 
@@ -38,8 +38,8 @@ public class SchedulerController {
      * 스케줄링 삭제
      */
     @DeleteMapping
-    public Boolean Delete(@RequestBody @Validated SchedulerDto.Req.Delete dto) {
-        log.info("### SchedulerController.Delete");
+    public Boolean deleteJob(@RequestBody @Validated SchedulerDto.Req.Delete dto) {
+        log.info("### SchedulerController.deleteJob");
         return schedulerService.deleteJob(dto.getJobName(), dto.getGroupName());
     }
 }

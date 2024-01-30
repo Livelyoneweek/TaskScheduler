@@ -12,12 +12,15 @@ public class SchedulerService {
 
     private final Scheduler scheduler;
 
-    public Boolean scheduleJob(String jobName, String groupName, String cronExpression, String type) {
-        log.info("### SchedulerService.scheduleJob");
+    /**
+     * 스케줄링 등록
+     */
+    public Boolean registerJob(String jobName, String groupName, String cronExpression, String type) {
+        log.info("### SchedulerService.registerJob");
         JobDataMap jobDataMap = new JobDataMap();
         jobDataMap.put("key", type);
 
-        JobDetail jobDetail = JobBuilder.newJob(SampleJob.class)
+        JobDetail jobDetail = JobBuilder.newJob(JobImpl.class)
                 .withIdentity(jobName, groupName)
                 .usingJobData(jobDataMap)
                 .build();
@@ -58,6 +61,7 @@ public class SchedulerService {
     }
 
     public boolean deleteJob(String jobName, String groupName) {
+        log.info("### SchedulerService.deleteJob");
         try {
             JobKey jobKey = JobKey.jobKey(jobName, groupName);
             return scheduler.deleteJob(jobKey);
